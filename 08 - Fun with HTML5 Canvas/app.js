@@ -29,6 +29,7 @@ function draw(e){
     if(hue >= 360){
         hue = 0;
     }
+    //if line width is great than 100 or less than 1, change direction
     if(ctx.lineWidth >= 100 || ctx.lineWidth <= 1){
         direction = !direction;
     }
@@ -39,11 +40,14 @@ function draw(e){
     }
 }
 
+
+//listen for when to start, change isDrawing to true and reset lastX and lastY
 canvas.addEventListener('mousedown', (e)=>{ 
     isDrawing = true;
     [lastX,lastY] = [e.offsetX,e.offsetY];
 });
-
+//draw while mouse is down and moving
  canvas.addEventListener('mousemove', draw);
+ //stop drawing on mouse up or mouse out
  canvas.addEventListener('mouseup', ()=> isDrawing = false)
  canvas.addEventListener('mouseout', ()=> isDrawing = false);
